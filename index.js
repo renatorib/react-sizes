@@ -1,3 +1,1 @@
-module.exports = {
-  default: require('./lib/Sizes'),
-};
+module.exports = require('./lib/Sizes');
