@@ -6,7 +6,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/renatorib/react-sizes.svg?style=flat-square)](https://github.com/renatorib/react-sizes/stargazers)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/renatorib/react-sizes.svg?style=social&style=flat-square)](https://twitter.com/intent/tweet?url=https://github.com/renatorib/react-sizes)
 
-### Install
+## Install
 ```
 yarn add react-sizes
 ```
@@ -15,7 +15,7 @@ or
 npm install react-sizes
 ```
 
-#### What and why.
+## What and why.
 React Sizes is a high-order component with a high performance that transform window sizes (width and height) into props.  
 You can check inside your component, for example, if user's window is less than 480 pixels of width, and add a custom
 content.
@@ -23,7 +23,7 @@ content.
 It can be very powerful for when you need to display different content for mobile and desktop.
 But it's not limited to this case. Just use that at your needs.  
 
-### Usage
+## Usage
 
 #### With class component.
 ```jsx
