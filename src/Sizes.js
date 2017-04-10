@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from 'react';
 import { v4 } from 'uuid';
 import keys from 'lodash.keys';
@@ -14,7 +12,7 @@ const Sizes = (...mappedSizesToProps) => (WrappedComponent) => {
   return class extends Component {
     static displayName = `Sizes(${getDisplayName(WrappedComponent)})`;
 
-    state: State = {
+    state = {
       id: `A${v4()}`,
       propsToPass: {},
     };
@@ -53,7 +51,7 @@ const Sizes = (...mappedSizesToProps) => (WrappedComponent) => {
       throttle(this.dispatchSizes, 200)
     );
 
-    parseMappedSizesToProps = ({ width, height }: Object) => {
+    parseMappedSizesToProps = ({ width, height }) => {
       const propsToPass = mappedSizesToProps
         .map(check => check({ width, height }))
         .reduce((acc, props) => ({ ...acc, ...props }), {});
