@@ -154,7 +154,7 @@ When each component unmounted, it unsubscribe for global dispatches, and when la
 the listener is removed.
 
 #### Throttle
-By now the listener callback is hardcoded as (throttle)[https://css-tricks.com/debouncing-throttling-explained-examples/]
+By now the listener callback is hardcoded as [throttle](https://css-tricks.com/debouncing-throttling-explained-examples/)
 function of 200ms. Because of having a global listener, we have a limitation on changing this behavior.
 I don't see it as tradeoff, and I think it can have good workarounds.
 Then, for the future, I intend to work to bring a solution to this important customization.
@@ -188,7 +188,7 @@ const mapSizesToProps = ({ width }) => ({
 });
 ```
 
-#### Contribute
+## Contribute
 
 You can help improving this project sending PRs and helping with issues.  
 Also you ping me at [Twitter](http://twitter.com/renatorib_)
