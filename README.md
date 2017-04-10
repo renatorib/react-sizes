@@ -93,7 +93,7 @@ const MyComponent = enhancer(({ isMobile, counter, setCounter }) => (
     <div>
       Count: {counter} <button onClick={() => setCounter(n => n + 1)}>Increment</button>
     </div>
-    <div>{ this.props.isMobile ? 'Is Mobile' : 'Is Not Mobile' }</div>
+    <div>{isMobile ? 'Is Mobile' : 'Is Not Mobile'}</div>
   </div>
 ));
 
@@ -103,10 +103,12 @@ export default MyComponent;
 #### With presets selectors.
 ```diff
 - const mapSizesToProps = ({ width }) => ({
+-   isMobile: width < 480,
+- });
+
 + const mapSizesToProps = sizes => ({
--  isMobile: width < 480,
 +  isMobile: Sizes.isMobile(sizes),
-});
++ });
 ```
 
 ## Presets Selectors
@@ -131,12 +133,14 @@ If it don't fit to your needs, you can create your own selectors.
 ```jsx
 // utils/sizes/selectors.js
 export const isntDesktop = ({ width }) => width < 1024;
+export const backgroundColor = ({ width }) => width < 480 ? 'red' : 'green;
 
 // your component
-import { isntDesktop } from 'utils/sizes/selectors';
+import { isntDesktop, backgroundColor } from 'utils/sizes/selectors';
 
 const mapSizesToProps = sizes => ({
   canDisplayMobileFeature: isntDesktop(sizes),
+  backgroundColor: backgroundColor(sizes),
 });
 ```
 > `sizes` argument is an object with `width` and `height` properties and represents DOM window width and height.
