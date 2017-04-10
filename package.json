@@ -9,7 +9,7 @@
     "dev": "chokidar 'src/**/*' -c 'yarn build'",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "np": "np"
+    "pub": "yarn build && np"
   },
   "repository": {
     "type": "git",

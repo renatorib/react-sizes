@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/utils/index.js"],"names":["getDisplayName"],"mappings":";;;;;;;;;;;;;QAAOA,c","file":"index.js","sourcesContent":["export getDisplayName from './get-display-name';\n"]}
