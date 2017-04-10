@@ -1,4 +1,4 @@
-![react-sizes](,/logo.png)
+![react-sizes](./logo.png)
 
 [![npm](https://img.shields.io/npm/v/react-sizes.svg?style=flat-square)](https://img.shields.io/npm/v/react-sizes.svg)
 [![npm](https://img.shields.io/npm/dt/react-sizes.svg?style=flat-square)](https://img.shields.io/npm/v/react-sizes.svg)
