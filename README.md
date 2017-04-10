@@ -74,7 +74,7 @@ const mapSizesToProps = ({ width }) => ({
   isMobile: width < 480,
 });
 
-export Sizes(mapMediaToProps)(MyComponent);
+export Sizes(mapSizesToProps)(MyComponent);
 ```
 
 #### Interoperate with other libraries.
