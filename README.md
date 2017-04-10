@@ -1,23 +1,27 @@
-<p align="center"><img src="logo.png" /></p>
+![react-sizes](,/logo.png)
 
 [![npm](https://img.shields.io/npm/v/react-sizes.svg?style=flat-square)](https://img.shields.io/npm/v/react-sizes.svg)
 [![npm](https://img.shields.io/npm/dt/react-sizes.svg?style=flat-square)](https://img.shields.io/npm/v/react-sizes.svg)
 [![GitHub issues](https://img.shields.io/github/issues/renatorib/react-sizes.svg?style=flat-square)](https://github.com/renatorib/react-sizes/issues)
 [![GitHub stars](https://img.shields.io/github/stars/renatorib/react-sizes.svg?style=flat-square)](https://github.com/renatorib/react-sizes/stargazers)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/renatorib/react-sizes.svg?style=social&style=flat-square)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
-
----
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/renatorib/react-sizes.svg?style=social&style=flat-square)](https://twitter.com/intent/tweet?url=https://github.com/renatorib/react-sizes)
 
 ### Install
 ```
 yarn add react-sizes
 ```
+or
+```
+npm install react-sizes
+```
 
 #### What and why.
 React Sizes is a high-order component with a high performance that transform window sizes (width and height) into props.  
 You can check inside your component, for example, if user's window is less than 480 pixels of width, and add a custom
-content. It can be very powerful for when you need to display different content for mobile and desktop.
-But it's not limited to this case. Just use that at your needs.
+content.
+
+It can be very powerful for when you need to display different content for mobile and desktop.
+But it's not limited to this case. Just use that at your needs.  
 
 ### Usage
 
