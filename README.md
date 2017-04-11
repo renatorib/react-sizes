@@ -133,7 +133,7 @@ If it don't fit to your needs, you can create your own selectors.
 ```jsx
 // utils/sizes/selectors.js
 export const isntDesktop = ({ width }) => width < 1024;
-export const backgroundColor = ({ width }) => width < 480 ? 'red' : 'green;
+export const backgroundColor = ({ width }) => width < 480 ? 'red' : 'green';
 
 // your component
 import { isntDesktop, backgroundColor } from 'utils/sizes/selectors';
