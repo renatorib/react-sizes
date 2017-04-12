@@ -43,6 +43,7 @@ const mapSizesToProps = ({ width }) => ({
 
 export Sizes(mapSizesToProps)(MyComponent);
 ```
+You can play with this example [here](https://codesandbox.io/s/Rg0DDOWnE).
 
 #### As decorator.
 ```jsx
