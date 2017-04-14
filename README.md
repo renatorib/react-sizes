@@ -1,7 +1,7 @@
 ![react-sizes](./logo.png)
 
-[![npm](https://img.shields.io/npm/v/react-sizes.svg?style=flat-square)](https://img.shields.io/npm/v/react-sizes.svg)
-[![npm](https://img.shields.io/npm/dt/react-sizes.svg?style=flat-square)](https://img.shields.io/npm/v/react-sizes.svg)
+[![npm](https://img.shields.io/npm/v/react-sizes.svg?style=flat-square)](https://www.npmjs.com/package/react-sizes)
+[![npm](https://img.shields.io/npm/dt/react-sizes.svg?style=flat-square)](https://www.npmjs.com/package/react-sizes)
 [![GitHub issues](https://img.shields.io/github/issues/renatorib/react-sizes.svg?style=flat-square)](https://github.com/renatorib/react-sizes/issues)
 [![GitHub stars](https://img.shields.io/github/stars/renatorib/react-sizes.svg?style=flat-square)](https://github.com/renatorib/react-sizes/stargazers)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/renatorib/react-sizes.svg?style=social&style=flat-square)](https://twitter.com/intent/tweet?url=https://github.com/renatorib/react-sizes)
@@ -26,7 +26,7 @@ But it's not limited to this case. Just use that at your needs.
 
 #### With class component.
 ```jsx
-import React from 'react';
+import React, { Component } from 'react';
 import Sizes from 'react-sizes';
 
 class MyComponent extends Component {
