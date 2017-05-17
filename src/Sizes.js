@@ -27,8 +27,8 @@ const Sizes = (...mappedSizesToProps) => (WrappedComponent) => {
     constructor(props) {
       super(props)
       this.state.propsToPass = parseMappedSizesToProps({
-        width: window && window.innerWidth,
-        height: window && window.innerHeight,
+        width: typeof window !== 'undefined' && window.innerWidth,
+        height: typeof window !== 'undefined' && window.innerHeight,
       })
     }
 
@@ -55,8 +55,8 @@ const Sizes = (...mappedSizesToProps) => (WrappedComponent) => {
 
         if (typeof callback === 'function') {
           callback({
-            width: window && window.innerWidth,
-            height: window && window.innerHeight,
+            width: typeof window !== 'undefined' && window.innerWidth,
+            height: typeof window !== 'undefined' && window.innerHeight,
           });
         }
       });
