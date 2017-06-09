@@ -3,19 +3,12 @@ import { v4 } from 'uuid';
 import keys from 'lodash.keys';
 import throttle from 'lodash.throttle';
 
-import getDisplayName from 'react-display-name';
+import { getDisplayName } from './utils';
 
 let resizeListener;
 const listeners = {};
 
 const Sizes = (...mappedSizesToProps) => (WrappedComponent) => {
-  const parseMappedSizesToProps = ({ width, height }) => {
-    const propsToPass = mappedSizesToProps
-      .map(check => check({width, height}))
-      .reduce((acc, props) => ({...acc, ...props}), {});
-    return propsToPass
-  }
-
   return class extends Component {
     static displayName = `Sizes(${getDisplayName(WrappedComponent)})`;
 
@@ -24,20 +17,12 @@ const Sizes = (...mappedSizesToProps) => (WrappedComponent) => {
       propsToPass: {},
     };
 
-    constructor(props) {
-      super(props)
-      this.state.propsToPass = parseMappedSizesToProps({
-        width: typeof window !== 'undefined' && window.innerWidth,
-        height: typeof window !== 'undefined' && window.innerHeight,
-      })
-    }
-
     componentDidMount() {
       if (!resizeListener) {
         resizeListener = window.addEventListener('resize', this.throttledWindowResize);
       }
 
-      listeners[this.state.id] = dimensions => this.setState({ propsToPass: parseMappedSizesToProps(dimensions) });
+      listeners[this.state.id] = this.parseMappedSizesToProps;
       this.dispatchSizes();
     }
 
@@ -55,8 +40,8 @@ const Sizes = (...mappedSizesToProps) => (WrappedComponent) => {
 
         if (typeof callback === 'function') {
           callback({
-            width: typeof window !== 'undefined' && window.innerWidth,
-            height: typeof window !== 'undefined' && window.innerHeight,
+            width: window && window.innerWidth,
+            height: window && window.innerHeight,
           });
         }
       });
@@ -65,6 +50,14 @@ const Sizes = (...mappedSizesToProps) => (WrappedComponent) => {
     throttledWindowResize = (
       throttle(this.dispatchSizes, 200)
     );
+
+    parseMappedSizesToProps = ({ width, height }) => {
+      const propsToPass = mappedSizesToProps
+        .map(check => check({ width, height }))
+        .reduce((acc, props) => ({ ...acc, ...props }), {});
+
+      this.setState({ propsToPass });
+    }
 
     render() {
       return <WrappedComponent {...this.props} {...this.state.propsToPass} />;
