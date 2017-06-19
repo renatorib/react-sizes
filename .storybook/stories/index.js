@@ -1,16 +1,17 @@
 import React from 'react';
 import { storiesOf, action, linkTo } from '@kadira/storybook';
 import { Code, Result } from '../components';
-import Sizes from '../../lib/Sizes';
+import MobileBreakpoint from '../components/MobileBreakpoint';
+import withSizes from '../../lib/withSizes';
 
 const mapSizesToProps = sizes => ({
   backgroundColor: sizes.width > 800 ? 'green' : 'blue',
-  isMobile: Sizes.isMobile(sizes),
-  isTablet: Sizes.isTablet(sizes),
-  isDesktop: Sizes.isDesktop(sizes),
+  isMobile: withSizes.isMobile(sizes),
+  isTablet: withSizes.isTablet(sizes),
+  isDesktop: withSizes.isDesktop(sizes),
 });
 
-const ExampleSizedComponent = Sizes(mapSizesToProps)(
+const ExampleSizedComponent = withSizes(mapSizesToProps)(
   ({ isMobile, isTablet, isDesktop, backgroundColor }) => (
     <div style={{ backgroundColor, color: 'white', padding: '30px' }}>
       <div><strong>Resize your window</strong></div>
@@ -29,16 +30,16 @@ storiesOf('Sizes', module)
       </Result>
       <Code>
 {`import React from 'react';
-import Sizes from 'react-sizes';
+import withSizes from 'react-sizes';
 
 const mapSizesToProps = sizes => ({
   backgroundColor: sizes.width > 800 ? 'green' : 'blue',
-  isMobile: Sizes.isMobile(sizes),
-  isTablet: Sizes.isTablet(sizes),
-  isDesktop: Sizes.isDesktop(sizes),
+  isMobile: withSizes.isMobile(sizes),
+  isTablet: withSizes.isTablet(sizes),
+  isDesktop: withSizes.isDesktop(sizes),
 });
 
-const ExampleSizedComponent = Sizes(mapSizesToProps)(
+const ExampleSizedComponent = withSizes(mapSizesToProps)(
   ({ isMobile, isTablet, isDesktop, backgroundColor }) => (
     <div><strong>Resize your window</strong></div>
     <div style={{ backgroundColor, color: 'white', padding: '30px' }}>
@@ -50,4 +51,13 @@ const ExampleSizedComponent = Sizes(mapSizesToProps)(
 );`}
       </Code>
     </div>
-  ));
+  ))
+
+  .add('mobileBreakpoint', () => (
+    <div>
+      <MobileBreakpoint breakpoint={300} />
+      <MobileBreakpoint breakpoint={500} />
+      <MobileBreakpoint breakpoint={700} />
+    </div>
+  ))
+;

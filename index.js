@@ -1,1 +1,1 @@
-module.exports = require('./lib/Sizes');
+module.exports = require('./lib/withSizes');

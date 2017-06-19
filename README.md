@@ -27,7 +27,7 @@ But it's not limited to this case. Just use that at your needs.
 #### With class component.
 ```jsx
 import React, { Component } from 'react';
-import Sizes from 'react-sizes';
+import withSizes from 'react-sizes';
 
 class MyComponent extends Component {
   render() {
@@ -41,16 +41,16 @@ const mapSizesToProps = ({ width }) => ({
   isMobile: width < 480,
 });
 
-export Sizes(mapSizesToProps)(MyComponent);
+export default withSizes(mapSizesToProps)(MyComponent);
 ```
 You can play with this example [here](https://codesandbox.io/s/Rg0DDOWnE).
 
 #### As decorator.
 ```jsx
 import React from 'react';
-import Sizes from 'react-sizes';
+import withSizes from 'react-sizes';
 
-@Sizes(({ width }) => ({ isMobile: width < 480 }))
+@withSizes(({ width }) => ({ isMobile: width < 480 }))
 class MyComponent extends Component {
   render() {
     return (
@@ -62,31 +62,15 @@ class MyComponent extends Component {
 export default MyComponent;
 ```
 
-#### With functional component.
-```jsx
-import React from 'react';
-import Sizes from 'react-sizes';
-
-const MyComponent = ({ isMobile }) => (
-  <div>{isMobile ? 'Is Mobile' : 'Is Not Mobile'}</div>
-);
-
-const mapSizesToProps = ({ width }) => ({
-  isMobile: width < 480,
-});
-
-export Sizes(mapSizesToProps)(MyComponent);
-```
-
 #### Interoperate with other libraries.
 ```jsx
 import React from 'react';
-import Sizes from 'react-sizes';
+import withSizes from 'react-sizes';
 import { withState, compose } from 'recompose';
 
 const enhancer = compose(
   withState('counter', 'setCounter', 0),
-  Sizes(({ width }) => ({ isMobile: width < 480 })),
+  withSizes(({ width }) => ({ isMobile: width < 480 })),
 );
 
 const MyComponent = enhancer(({ isMobile, counter, setCounter }) => (
@@ -101,6 +85,45 @@ const MyComponent = enhancer(({ isMobile, counter, setCounter }) => (
 export default MyComponent;
 ```
 
+#### With functional component.
+```jsx
+import React from 'react';
+import withSizes from 'react-sizes';
+
+const MyComponent = ({ isMobile }) => (
+  <div>{isMobile ? 'Is Mobile' : 'Is Not Mobile'}</div>
+);
+
+const mapSizesToProps = ({ width }) => ({
+  isMobile: width < 480,
+});
+
+export default withSizes(mapSizesToProps)(MyComponent);
+```
+
+#### Mess with props.
+(Added in 0.1.0)
+```jsx
+import React from 'react';
+import withSizes from 'react-sizes';
+
+const MyComponent = ({ isMobile }) => (
+  <div>{isMobile ? 'Is Mobile' : 'Is Not Mobile'}</div>
+);
+
+const mapSizesToProps = ({ width }, { mobileBreakpoint }) => ({
+  isMobile: width < mobileBreakpoint,
+});
+
+export default withSizes(mapSizesToProps)(MyComponent);
+```
+then:
+```jsx
+<MyComponent mobileBreakpoint={480} />
+<MyComponent mobileBreakpoint={400} />
+<MyComponent mobileBreakpoint={600} />
+```
+
 #### With presets selectors.
 ```diff
 - const mapSizesToProps = ({ width }) => ({
@@ -108,26 +131,26 @@ export default MyComponent;
 - });
 
 + const mapSizesToProps = sizes => ({
-+  isMobile: Sizes.isMobile(sizes),
++  isMobile: withSizes.isMobile(sizes),
 + });
 ```
 
 ## Presets Selectors
 
-You can check all **our** presets selectors at our main code `src/Sizes.js`.
+You can check all **our** presets selectors at our main code `src/withSizes.js`.
 ```js
-Sizes.isMobile = ({ width }) => width < 480;
-Sizes.isTablet = ({ width }) => width >= 480 && width < 1024;
-Sizes.isDesktop = ({ width }) => width >= 1024;
+withSizes.isMobile = ({ width }) => width < 480;
+withSizes.isTablet = ({ width }) => width >= 480 && width < 1024;
+withSizes.isDesktop = ({ width }) => width >= 1024;
 
-Sizes.isGtMobile = (sizes) => !Sizes.isMobile(sizes);
-Sizes.isGtTablet = (sizes) => Sizes.isDesktop(sizes);
+withSizes.isGtMobile = (sizes) => !withSizes.isMobile(sizes);
+withSizes.isGtTablet = (sizes) => withSizes.isDesktop(sizes);
 
-Sizes.isStTablet = (sizes) => Sizes.isMobile(sizes);
-Sizes.isStDesktop = (sizes) => !Sizes.isStDesktop(sizes);
+withSizes.isStTablet = (sizes) => withSizes.isMobile(sizes);
+withSizes.isStDesktop = (sizes) => !withSizes.isStDesktop(sizes);
 
-Sizes.isTabletAndGreater = (sizes) => !Sizes.isMobile(sizes);
-Sizes.isTabletAndSmaller = (sizes) => !Sizes.isStDesktop(sizes);
+withSizes.isTabletAndGreater = (sizes) => !withSizes.isMobile(sizes);
+withSizes.isTabletAndSmaller = (sizes) => !withSizes.isStDesktop(sizes);
 ```
 
 If it don't fit to your needs, you can create your own selectors.

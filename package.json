@@ -9,7 +9,7 @@
     "dev": "chokidar 'src/**/*' -c 'yarn build'",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "pub": "yarn build && np"
+    "pub": "npm run build && np"
   },
   "repository": {
     "type": "git",
@@ -47,7 +47,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "chokidar": "^1.6.1",
+    "chokidar-cli": "^1.2.0",
     "del-cli": "^0.2.1",
     "np": "^2.13.1",
     "react-dom": "^15.5.3",
