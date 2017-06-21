@@ -18,7 +18,6 @@ const withSizes = (...mappedSizesToProps) => (WrappedComponent) => {
     const propsToPass = mappedSizesToProps
       .map(check => check(dimensions, props))
       .reduce((acc, props) => ({...acc, ...props}), {});
-    console.log(dimensions, props, propsToPass);
 
     return propsToPass;
   }
@@ -39,8 +38,6 @@ const withSizes = (...mappedSizesToProps) => (WrappedComponent) => {
       listeners[this.state.id] = (sizes) => this.setState({
         propsToPass: parseMappedSizesToProps(sizes, this.props)
       });
-
-      console.log(listeners);
 
       this.dispatchSizes();
     }
