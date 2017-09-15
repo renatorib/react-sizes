@@ -8,7 +8,7 @@
     "lint": "eslint src",
     "build": "cross-env NODE_ENV=production npm run lint && npm run clear && babel src -d lib --source-maps",
     "prepublish": "npm run lint && npm run clear && npm run build",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "cross-env NODE_ENV=debug start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "repository": {

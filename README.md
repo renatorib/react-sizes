@@ -169,23 +169,6 @@ const mapSizesToProps = sizes => ({
 ```
 > `sizes` argument is an object with `width` and `height` properties and represents DOM window width and height.
 
-## Performance Notes
-
-#### Global listener
-Window resize event listener is grouped at one global listener only.
-So you can have as many components as you want using Sizes hoc, which will not have multiple resize listeners,
-but only one that will dispatch for all instances.  
-
-Don't worry, Sizes handles `componentWillUnmount` to remove unnecessary callbacks.
-When each component unmounted, it unsubscribe for global dispatches, and when last component is unmounted,
-the listener is removed.
-
-#### Throttle
-By now the listener callback is hardcoded as [throttle](https://css-tricks.com/debouncing-throttling-explained-examples/)
-function of 200ms. Because of having a global listener, we have a limitation on changing this behavior.
-I don't see it as tradeoff, and I think it can have good workarounds.
-Then, for the future, I intend to work to bring a solution to this important customization.
-
 ## Guide
 
 #### mapSizesToProps(sizes)
@@ -214,6 +197,11 @@ const mapSizesToProps = ({ width }) => ({
   backgroundColor: width < 700 ? 'red' : 'green',
 });
 ```
+
+## Performance Notes
+
+#### Shallow Compare
+React Sizes do a shallow compare in props generated from `mapSizesToProps` (called `propsToPass`), so it will only rerender when they really change. If you create a deep data sctructure, this can generate false positives. In these cases, we recommend using immutable for a more reliable shallow compare result. Or just don't use deep data structures, if possible.
 
 ## Contribute
 
