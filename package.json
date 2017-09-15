@@ -4,10 +4,10 @@
   "description": "Hoc to easily map window sizes to props.",
   "main": "lib/index.js",
   "scripts": {
-    "clean": "rimraf lib",
+    "clear": "rimraf lib",
     "lint": "eslint src",
     "build": "cross-env NODE_ENV=production npm run lint && npm run clear && babel src -d lib --source-maps",
-    "prepublish": "npm run lint && npm run clean && npm run build",
+    "prepublish": "npm run lint && npm run clear && npm run build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
