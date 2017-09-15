@@ -2,19 +2,23 @@
   "name": "react-sizes",
   "version": "0.1.2",
   "description": "Hoc to easily map window sizes to props.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "clear": "del lib",
-    "build": "yarn clear && babel src -d lib --source-maps",
-    "dev": "chokidar 'src/**/*' -c 'yarn build'",
+    "clean": "rimraf lib",
+    "lint": "eslint src",
+    "build": "cross-env NODE_ENV=production npm run lint && npm run clear && babel src -d lib --source-maps",
+    "prepublish": "npm run lint && npm run clean && npm run build",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "pub": "npm run build && np"
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/renatorib/react-sizes.git"
   },
+  "files": [
+    "lib",
+    "src"
+  ],
   "keywords": [
     "react",
     "hoc",
@@ -36,23 +40,28 @@
   "dependencies": {
     "lodash.keys": "^4.2.0",
     "lodash.throttle": "^4.1.1",
-    "react-display-name": "^0.2.0",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.21.0",
     "babel-cli": "^6.24.1",
+    "babel-eslint": "^8.0.0",
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "chokidar-cli": "^1.2.0",
+    "cross-env": "^5.0.5",
     "del-cli": "^0.2.1",
+    "eslint": "^4.6.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-react": "^7.3.0",
     "np": "^2.13.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.5.3",
     "react-syntax-highlighter": "^5.3.0"
   },
   "peerDependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react": "^0.14.0 || ^15.0.0-0 || ^16.0.0-0"
   }
 }

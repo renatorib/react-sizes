@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf, action, linkTo } from '@kadira/storybook';
 import { Code, Result } from '../components';
 import MobileBreakpoint from '../components/MobileBreakpoint';
-import withSizes from '../../lib/withSizes';
+import withSizes from '../../src/withSizes';
 
 const mapSizesToProps = sizes => ({
   backgroundColor: sizes.width > 800 ? 'green' : 'blue',

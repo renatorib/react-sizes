@@ -1,5 +1,5 @@
 import React from 'react';
-import withSizes from '../../lib/withSizes';
+import withSizes from '../../src/withSizes';
 
 const MobileBreakpoint = ({ isMobile, breakpoint, width }) => (
   <div>
