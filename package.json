@@ -1,6 +1,6 @@
 {
   "name": "react-sizes",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Hoc to easily map window sizes to props.",
   "main": "lib/index.js",
   "scripts": {
