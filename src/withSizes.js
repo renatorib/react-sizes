@@ -3,8 +3,6 @@
 import React, { Component } from 'react'
 import throttle from 'lodash.throttle'
 
-import * as presets from './presets'
-
 import getDisplayName from './utils/getDisplayName'
 import shallowDiff from './utils/shallowDiff'
 import getWindowSizes from './utils/getWindowSizes'
@@ -62,4 +60,4 @@ const withSizes = (...mappedSizesToProps) => (WrappedComponent) => {
   }
 }
 
-export default Object.assign(withSizes, presets)
+export default withSizes

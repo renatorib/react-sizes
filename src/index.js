@@ -1,3 +1,7 @@
-import withSizes from './withSizes'
+export withSizes from './withSizes'
+export createSizedComponent from './createSizedComponent'
 
-export default withSizes
+const all = Object.assign({}, exports)
+delete all.default
+
+export default all
