@@ -41,16 +41,18 @@ const withSizes = (...mappedSizesToProps) => (WrappedComponent) => {
     /* Lifecycles */
 
     componentDidMount() {
-      window.addEventListener('resize', this.throttledDispatchSizes)
-
-      /* dispatch if aren't computed on first render */
-      if (!this.state.initialSizes.canUseDOM) {
+      if (this.state.initialSizes.canUseDOM) {
+        window.addEventListener('resize', this.throttledDispatchSizes)
+      } else {
+        /* dispatch if aren't computed on first render */
         this.dispatchSizes()
       }
     }
 
     componentWillUnmount() {
-      window.removeEventListener('resize', this.throttledDispatchSizes)
+      if (this.state.initialSizes.canUseDOM) {
+        window.removeEventListener('resize', this.throttledDispatchSizes)
+      }
     }
 
     render() {
