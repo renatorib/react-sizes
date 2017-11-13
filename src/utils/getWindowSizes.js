@@ -1,4 +1,4 @@
-const getSizes = (window) => {
+const getSizes = () => {
   const canUseDOM = typeof window !== 'undefined'
 
   return {

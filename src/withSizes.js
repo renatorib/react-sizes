@@ -20,14 +20,14 @@ const withSizes = (...mappedSizesToProps) => (WrappedComponent) => {
     static displayName = `withSizes(${getDisplayName(WrappedComponent)})`
 
     state = {
-      initialSizes: getWindowSizes(window),
-      propsToPass: parseMappedSizesToProps(getWindowSizes(window), this.props),
+      initialSizes: getWindowSizes(),
+      propsToPass: parseMappedSizesToProps(getWindowSizes(), this.props),
     }
 
     /* Dispatching & Throttling */
 
     dispatchSizes = () => {
-      const propsToPass = parseMappedSizesToProps(getWindowSizes(window), this.props)
+      const propsToPass = parseMappedSizesToProps(getWindowSizes(), this.props)
 
       if (shallowDiff(propsToPass, this.state.propsToPass)) {
         this.setState({ propsToPass })
