@@ -1,7 +1,11 @@
-export withSizes from './withSizes'
+import withSizes from './withSizes'
+import * as presets from './presets'
+
+/* 
+// this will be a breaking change
 export createSizedComponent from './createSizedComponent'
 
 const all = Object.assign({}, exports)
-delete all.default
+delete all.default */
 
-export default all
+export default Object.assign(withSizes, presets)
