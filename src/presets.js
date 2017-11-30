@@ -6,7 +6,7 @@ export const isGtMobile = (sizes) => !isMobile(sizes)
 export const isGtTablet = (sizes) => isDesktop(sizes)
 
 export const isStTablet = (sizes) => isMobile(sizes)
-export const isStDesktop = (sizes) => !isStDesktop(sizes)
+export const isStDesktop = (sizes) => !isDesktop(sizes)
 
 export const isTabletAndGreater = (sizes) => !isMobile(sizes)
 export const isTabletAndSmaller = (sizes) => !isStDesktop(sizes)
