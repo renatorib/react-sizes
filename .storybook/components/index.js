@@ -1,3 +1,3 @@
-export Block from './Block';
-export Code from './Code';
-export Result from './Result';
+export Block from './Block'
+export Code from './Code'
+export Result from './Result'

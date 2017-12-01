@@ -1,7 +1,7 @@
-import React from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { github as theme } from 'react-syntax-highlighter/dist/styles';
-import Block from './Block';
+import React from 'react'
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { github as theme } from 'react-syntax-highlighter/dist/styles'
+import Block from './Block'
 
 const Code = ({ children }) => (
   <Block title="Code">
@@ -9,6 +9,6 @@ const Code = ({ children }) => (
       {children}
     </SyntaxHighlighter>
   </Block>
-);
+)
 
-export default Code;
+export default Code

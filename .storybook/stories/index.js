@@ -1,26 +1,28 @@
-import React from 'react';
-import { storiesOf, action, linkTo } from '@kadira/storybook';
-import { Code, Result } from '../components';
-import MobileBreakpoint from '../components/MobileBreakpoint';
-import withSizes from '../../src/withSizes';
+import React from 'react'
+import { storiesOf, action, linkTo } from '@kadira/storybook'
+import { Code, Result } from '../components'
+import MobileBreakpoint from '../components/MobileBreakpoint'
+import withSizes from '../../src/withSizes'
 
 const mapSizesToProps = sizes => ({
   backgroundColor: sizes.width > 800 ? 'green' : 'blue',
   isMobile: withSizes.isMobile(sizes),
   isTablet: withSizes.isTablet(sizes),
   isDesktop: withSizes.isDesktop(sizes),
-});
+})
 
 const ExampleSizedComponent = withSizes(mapSizesToProps)(
   ({ isMobile, isTablet, isDesktop, backgroundColor }) => (
     <div style={{ backgroundColor, color: 'white', padding: '30px' }}>
-      <div><strong>Resize your window</strong></div>
+      <div>
+        <strong>Resize your window</strong>
+      </div>
       {isMobile && 'isMobile '}
       {isTablet && 'isTablet '}
       {isDesktop && 'isDesktop '}
     </div>
   )
-);
+)
 
 storiesOf('Sizes', module)
   .add('default behavior', () => (
@@ -29,7 +31,7 @@ storiesOf('Sizes', module)
         <ExampleSizedComponent />
       </Result>
       <Code>
-{`import React from 'react';
+        {`import React from 'react';
 import withSizes from 'react-sizes';
 
 const mapSizesToProps = sizes => ({
@@ -60,4 +62,3 @@ const ExampleSizedComponent = withSizes(mapSizesToProps)(
       <MobileBreakpoint breakpoint={700} />
     </div>
   ))
-;

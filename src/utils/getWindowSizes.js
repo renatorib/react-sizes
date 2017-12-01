@@ -1,4 +1,4 @@
-const getSizes = () => {
+const getWindowSizes = () => {
   const canUseDOM = typeof window !== 'undefined'
 
   return {
@@ -8,4 +8,4 @@ const getSizes = () => {
   }
 }
 
-export default getSizes
+export default getWindowSizes

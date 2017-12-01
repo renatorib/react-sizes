@@ -1,5 +1,6 @@
 import withSizes from './withSizes'
-import * as presets from './presets'
+import createSizedComponent from './createSizedComponent'
+import presets from './presets'
 
-export default Object.assign(withSizes, presets)
-
+export { createSizedComponent, presets, withSizes }
+export default withSizes

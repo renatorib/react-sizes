@@ -7,10 +7,11 @@ import getDisplayName from './utils/getDisplayName'
 import shallowDiff from './utils/shallowDiff'
 import getWindowSizes from './utils/getWindowSizes'
 
-const debug = process && process.env &&
-  process.env.NODE_ENV === 'debug'
+import * as presets from './presets'
 
-const withSizes = (...mappedSizesToProps) => (WrappedComponent) => {
+const debug = process && process.env && process.env.NODE_ENV === 'debug'
+
+const withSizes = (...mappedSizesToProps) => WrappedComponent => {
   const parseMappedSizesToProps = (dimensions, props) =>
     mappedSizesToProps
       .map(check => check(dimensions, props))
@@ -34,9 +35,7 @@ const withSizes = (...mappedSizesToProps) => (WrappedComponent) => {
       }
     }
 
-    throttledDispatchSizes = (
-      throttle(this.dispatchSizes, 200)
-    )
+    throttledDispatchSizes = throttle(this.dispatchSizes, 200)
 
     /* Lifecycles */
 
@@ -60,4 +59,4 @@ const withSizes = (...mappedSizesToProps) => (WrappedComponent) => {
   }
 }
 
-export default withSizes
+export default Object.assign(withSizes, { ...presets })
