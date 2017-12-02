@@ -1,2 +1,9 @@
 node_modules
 src
+.storybook
+.editorconfig
+.eslintrc
+.eslintignore
+.prettierrc
+logo.png
+rollup.config.js

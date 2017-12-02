@@ -1,4 +1,14 @@
 {
-  "presets": ["es2015", "react", "stage-2"],
-  "plugins": ["transform-export-extensions"]
+  "env": {
+    "es": {
+      "presets": ["es2015", "react", "stage-1"]
+    },
+    "commonjs": {
+      "presets": ["es2015", "react", "stage-1"]
+    },
+    "rollup": {
+      "presets": [["es2015", { "modules": false }], "react", "stage-1"],
+      "plugins": ["external-helpers"]
+    }
+  }
 }
