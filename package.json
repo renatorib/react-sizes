@@ -3,12 +3,18 @@
   "version": "0.4.2",
   "description": "Hoc to easily map window sizes to props.",
   "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
+  "browser": "dist/react-sizes.min.js",
   "scripts": {
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
-    "build:umd": "cross-env BABEL_ENV=rollup NODE_ENV=development rollup -c -o dist/react-bps.js",
-    "build:umd:min": "cross-env BABEL_ENV=rollup NODE_ENV=production rollup -c -o dist/react-bps.min.js",
-    "build:all": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
+    "build:umd":
+      "cross-env BABEL_ENV=rollup NODE_ENV=development rollup -c -o dist/react-sizes.js",
+    "build:umd:min":
+      "cross-env BABEL_ENV=rollup NODE_ENV=production rollup -c -o dist/react-sizes.min.js",
+    "build:all":
+      "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
     "build": "npm run clean && npm run build:all",
     "clean": "rimraf lib dist es",
     "lint": "eslint src",
@@ -20,10 +26,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/renatorib/react-sizes.git"
   },
-  "files": [
-    "lib",
-    "src"
-  ],
+  "files": ["lib", "src"],
   "keywords": [
     "react",
     "hoc",
