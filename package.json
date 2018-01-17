@@ -46,7 +46,8 @@
   },
   "homepage": "https://github.com/renatorib/react-sizes#readme",
   "dependencies": {
-    "lodash.throttle": "^4.1.1"
+    "lodash.throttle": "^4.1.1",
+    "prop-types": "^15.6.0"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.21.0",
