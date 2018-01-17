@@ -7,9 +7,8 @@ import getDisplayName from './utils/getDisplayName'
 import shallowDiff from './utils/shallowDiff'
 import getWindowSizes from './utils/getWindowSizes'
 
+import contextTypes from './contextTypes'
 import * as presets from './presets'
-
-const debug = process && process.env && process.env.NODE_ENV === 'debug'
 
 const withSizes = (...mappedSizesToProps) => WrappedComponent => {
   const parseMappedSizesToProps = (dimensions, props) =>
@@ -19,23 +18,43 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
 
   return class ComponentWithSizes extends Component {
     static displayName = `withSizes(${getDisplayName(WrappedComponent)})`
+    static contextTypes = contextTypes
 
-    state = {
-      initialSizes: getWindowSizes(),
-      propsToPass: parseMappedSizesToProps(getWindowSizes(), this.props),
+    constructor(props, context) {
+      super(props, context)
+
+      this.getWindowSizesWithFallback = () => {
+        const { fallbackHeight = null, fallbackWidth = null } = this.context
+        return getWindowSizes({ fallbackHeight, fallbackWidth })
+      }
+
+      this.getPropsToPass = () => {
+        return parseMappedSizesToProps(
+          this.getWindowSizesWithFallback(),
+          this.props
+        )
+      }
+
+      this.state = {
+        initialSizes: this.getWindowSizesWithFallback(),
+        propsToPass: this.getPropsToPass(),
+      }
     }
 
     /* Dispatching & Throttling */
 
     dispatchSizes = () => {
-      const propsToPass = parseMappedSizesToProps(getWindowSizes(), this.props)
+      const propsToPass = this.getPropsToPass()
 
       if (shallowDiff(propsToPass, this.state.propsToPass)) {
         this.setState({ propsToPass })
       }
     }
 
-    throttledDispatchSizes = throttle(this.dispatchSizes, 200)
+    throttledDispatchSizes = throttle(
+      this.dispatchSizes,
+      this.context.throttle || 200
+    )
 
     /* Lifecycles */
 
@@ -53,7 +72,6 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
     }
 
     render() {
-      if (debug) console.log('render', this.state.propsToPass)
       return <WrappedComponent {...this.props} {...this.state.propsToPass} />
     }
   }
