@@ -7,7 +7,7 @@ import getDisplayName from './utils/getDisplayName'
 import shallowDiff from './utils/shallowDiff'
 import getWindowSizes from './utils/getWindowSizes'
 
-import contextTypes from './contextTypes'
+import contextTypes, { contextKey } from './contextTypes'
 import * as presets from './presets'
 
 const withSizes = (...mappedSizesToProps) => WrappedComponent => {
@@ -24,7 +24,8 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
       super(props, context)
 
       this.getWindowSizesWithFallback = () => {
-        const { fallbackHeight = null, fallbackWidth = null } = this.context
+        const config = this.context[contextKey] || {}
+        const { fallbackHeight = null, fallbackWidth = null } = config
         return getWindowSizes({ fallbackHeight, fallbackWidth })
       }
 

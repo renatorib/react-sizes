@@ -255,7 +255,7 @@ const getSizesFallback = userAgent => {
 
   return {
     fallbackWidth: 1280,
-    fallbackHeiht: 700,
+    fallbackHeight: 700,
   }
 }
 
