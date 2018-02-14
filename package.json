@@ -24,7 +24,9 @@
     "url": "git+ssh://git@github.com/renatorib/react-sizes.git"
   },
   "files": [
+    "dist",
     "lib",
+    "es",
     "src"
   ],
   "keywords": [
