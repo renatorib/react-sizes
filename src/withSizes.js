@@ -61,11 +61,7 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
 
     componentDidMount() {
       window.addEventListener('resize', this.throttledDispatchSizes)
-
-      /* dispatch if aren't computed on first render */
-      if (!this.state.initialSizes.canUseDOM) {
-        this.dispatchSizes()
-      }
+      this.dispatchSizes()
     }
 
     componentWillUnmount() {
