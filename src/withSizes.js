@@ -54,7 +54,7 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
 
     throttledDispatchSizes = throttle(
       this.dispatchSizes,
-      this.context.throttle || 200
+      (this.context[contextKey] || {}).throttle || 200
     )
 
     /* Lifecycles */
