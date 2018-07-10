@@ -59,6 +59,10 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
 
     /* Lifecycles */
 
+    componentWillReceiveProps() {
+      this.dispatchSizes()
+    }
+
     componentDidMount() {
       window.addEventListener('resize', this.throttledDispatchSizes)
       this.dispatchSizes()
