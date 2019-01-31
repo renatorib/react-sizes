@@ -28,9 +28,9 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
         const {
           fallbackHeight = null,
           fallbackWidth = null,
-          useFallbackInClient = false,
+          forceFallback = false,
         } = config
-        return getWindowSizes({ fallbackHeight, fallbackWidth, forceFallback: useFallbackInClient })
+        return getWindowSizes({ fallbackHeight, fallbackWidth, forceFallback: forceFallback })
       }
 
       this.getPropsToPass = () => {
@@ -41,7 +41,6 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
       }
 
       this.state = {
-        initialSizes: this.getWindowSizesWithFallback(),
         propsToPass: this.getPropsToPass(),
       }
     }
