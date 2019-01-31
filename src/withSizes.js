@@ -6,8 +6,7 @@ import throttle from 'lodash.throttle'
 import getDisplayName from './utils/getDisplayName'
 import shallowDiff from './utils/shallowDiff'
 import getWindowSizes from './utils/getWindowSizes'
-
-import contextTypes, { contextKey } from './contextTypes'
+import SizesContext from './SizesContext'
 import * as presets from './presets'
 
 const withSizes = (...mappedSizesToProps) => WrappedComponent => {
@@ -18,14 +17,14 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
 
   return class ComponentWithSizes extends Component {
     static displayName = `withSizes(${getDisplayName(WrappedComponent)})`
-    static contextTypes = contextTypes
+    static contextType = SizesContext
 
     constructor(props, context) {
       super(props, context)
 
       this.getWindowSizesWithFallback = () => {
-        const config = this.context[contextKey] || {}
-        const { fallbackHeight = null, fallbackWidth = null } = config
+        const config = context
+        const { fallbackHeight, fallbackWidth } = config
         return getWindowSizes({ fallbackHeight, fallbackWidth })
       }
 
@@ -54,7 +53,7 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
 
     throttledDispatchSizes = throttle(
       this.dispatchSizes,
-      (this.context[contextKey] || {}).throttle || 200
+      this.context.throttle
     )
 
     /* Lifecycles */

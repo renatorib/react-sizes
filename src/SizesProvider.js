@@ -1,24 +1,8 @@
-import { Component } from 'react'
-import contextTypes, { contextKey } from './contextTypes'
+import React from 'react'
+import SizesContext from './SizesContext'
 
-class SizesProvider extends Component {
-  static childContextTypes = contextTypes
-
-  getChildContext() {
-    const { config = {} } = this.props
-
-    return {
-      [contextKey]: {
-        fallbackWidth: config.fallbackWidth || null,
-        fallbackHeight: config.fallbackHeight || null,
-        throttle: config.throttle || 200,
-      },
-    }
-  }
-
-  render() {
-    return this.props.children
-  }
-}
+const SizesProvider = ({ config, children }) => (
+  <SizesContext.Provider value={config}>{children}</SizesContext.Provider>
+)
 
 export default SizesProvider
