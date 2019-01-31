@@ -1,9 +1,9 @@
-const getWindowSizes = ({ fallbackWidth = null, fallbackHeight = null }) => {
+const getWindowSizes = ({ fallbackWidth = null, fallbackHeight = null, forceFallback = false }) => {
   const canUseDOM = typeof window !== 'undefined'
 
   return {
-    width: canUseDOM ? window.innerWidth : fallbackWidth,
-    height: canUseDOM ? window.innerHeight : fallbackHeight,
+    width: canUseDOM && !forceFallback ? window.innerWidth : fallbackWidth,
+    height: canUseDOM && !forceFallback ? window.innerHeight : fallbackHeight,
     canUseDOM,
   }
 }

@@ -11,6 +11,7 @@ class SizesProvider extends Component {
       [contextKey]: {
         fallbackWidth: config.fallbackWidth || null,
         fallbackHeight: config.fallbackHeight || null,
+        useFallbackInClient: config.useFallbackInClient || false,
         throttle: config.throttle || 200,
       },
     }
