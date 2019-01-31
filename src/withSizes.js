@@ -59,6 +59,8 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
       if (shallowDiff(propsToPass, state.propsToPass)) {
         return { propsToPass }
       }
+
+      return null
     }
 
     componentDidMount() {
