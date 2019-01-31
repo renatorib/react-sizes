@@ -25,7 +25,8 @@
     "import/no-unresolved": ["error", { "ignore": ["^react$"] }],
     "comma-dangle": ["error", "always-multiline"],
     "semi": ["error", "never"],
-    "no-trailing-spaces": ["error", { "skipBlankLines": true }]
+    "no-trailing-spaces": ["error", { "skipBlankLines": true }],
+    "no-unused-vars": ["error", { "ignoreRestSiblings": true }]
   },
   "plugins": [
     "import",
