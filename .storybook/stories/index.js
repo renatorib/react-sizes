@@ -1,5 +1,5 @@
 import React from 'react'
-import { storiesOf, action, linkTo } from '@kadira/storybook'
+import { storiesOf } from '@storybook/react'
 import { Code, Result } from '../components'
 import MobileBreakpoint from '../components/MobileBreakpoint'
 import withSizes from '../../src/withSizes'
