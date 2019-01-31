@@ -10,8 +10,8 @@ import SizesContext from './SizesContext'
 import * as presets from './presets'
 
 const getWindowSizesWithFallback = props => {
-  const { fallbackHeight, fallbackWidth } = props
-  return getWindowSizes({ fallbackHeight, fallbackWidth })
+  const { fallbackHeight, fallbackWidth, forceFallback } = props
+  return getWindowSizes({ fallbackHeight, fallbackWidth, forceFallback })
 }
 
 const withSizes = (...mappedSizesToProps) => WrappedComponent => {
@@ -74,6 +74,7 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
       const {
         fallbackHeight,
         fallbackWidth,
+        forceFallback,
         ...otherProps
       } = this.props
 
