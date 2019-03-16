@@ -5,7 +5,7 @@ import Block from './Block'
 
 const Code = ({ children }) => (
   <Block title="Code">
-    <SyntaxHighlighter language="jsx" style={dark} customStyle={{ margin: 0 }}>
+    <SyntaxHighlighter language="jsx" style={theme} customStyle={{ margin: 0 }}>
       {children}
     </SyntaxHighlighter>
   </Block>
