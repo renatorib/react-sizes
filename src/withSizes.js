@@ -1,14 +1,18 @@
 /* eslint-disable no-console */
 
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import throttle from 'lodash.throttle'
 
 import getDisplayName from './utils/getDisplayName'
 import shallowDiff from './utils/shallowDiff'
 import getWindowSizes from './utils/getWindowSizes'
-
-import contextTypes, { contextKey } from './contextTypes'
+import SizesContext from './SizesContext'
 import * as presets from './presets'
+
+const getWindowSizesWithFallback = props => {
+  const { fallbackHeight, fallbackWidth } = props
+  return getWindowSizes({ fallbackHeight, fallbackWidth })
+}
 
 const withSizes = (...mappedSizesToProps) => WrappedComponent => {
   const parseMappedSizesToProps = (dimensions, props) =>
@@ -16,28 +20,20 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
       .map(check => check(dimensions, props))
       .reduce((acc, props) => ({ ...acc, ...props }), {})
 
-  return class ComponentWithSizes extends Component {
+  class ComponentWithSizes extends PureComponent {
     static displayName = `withSizes(${getDisplayName(WrappedComponent)})`
-    static contextTypes = contextTypes
 
-    constructor(props, context) {
-      super(props, context)
-
-      this.getWindowSizesWithFallback = () => {
-        const config = this.context[contextKey] || {}
-        const { fallbackHeight = null, fallbackWidth = null } = config
-        return getWindowSizes({ fallbackHeight, fallbackWidth })
-      }
+    constructor(props) {
+      super(props)
 
       this.getPropsToPass = () => {
         return parseMappedSizesToProps(
-          this.getWindowSizesWithFallback(),
+          getWindowSizesWithFallback(this.props),
           this.props
         )
       }
 
       this.state = {
-        initialSizes: this.getWindowSizesWithFallback(),
         propsToPass: this.getPropsToPass(),
       }
     }
@@ -52,15 +48,19 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
       }
     }
 
-    throttledDispatchSizes = throttle(
-      this.dispatchSizes,
-      (this.context[contextKey] || {}).throttle || 200
-    )
+    throttledDispatchSizes = throttle(this.dispatchSizes, this.props.throttle)
 
     /* Lifecycles */
+    static getDerivedStateFromProps(props, state) {
+      const propsToPass = parseMappedSizesToProps(
+        getWindowSizesWithFallback(props),
+        props
+      )
+      if (shallowDiff(propsToPass, state.propsToPass)) {
+        return { propsToPass }
+      }
 
-    componentWillReceiveProps() {
-      this.dispatchSizes()
+      return null
     }
 
     componentDidMount() {
@@ -73,9 +73,23 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
     }
 
     render() {
-      return <WrappedComponent {...this.props} {...this.state.propsToPass} />
+      const {
+        fallbackHeight,
+        fallbackWidth,
+        ...otherProps
+      } = this.props
+
+      return <WrappedComponent {...otherProps} {...this.state.propsToPass} />
     }
   }
+
+  const WithSizes = props => (
+    <SizesContext.Consumer>
+      {config => <ComponentWithSizes {...config} {...props} />}
+    </SizesContext.Consumer>
+  )
+
+  return WithSizes
 }
 
 export default Object.assign(withSizes, { ...presets })

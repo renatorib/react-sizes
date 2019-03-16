@@ -1,3 +1,3 @@
-export Block from './Block'
-export Code from './Code'
-export Result from './Result'
+export { default as Block } from './Block'
+export { default as Code } from './Code'
+export { default as Result } from './Result'
