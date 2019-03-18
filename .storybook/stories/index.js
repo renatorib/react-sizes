@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { Code, Result } from '../components'
 import MobileBreakpoint from '../components/MobileBreakpoint'
 import withSizes from '../../src/withSizes'
+import SizesProvider from '../../src/SizesProvider'
 
 const mapSizesToProps = sizes => ({
   backgroundColor: sizes.width > 800 ? 'green' : 'blue',
@@ -23,6 +24,33 @@ const ExampleSizedComponent = withSizes(mapSizesToProps)(
     </div>
   )
 )
+
+class ForceFallbackExample extends React.Component {
+  state = {
+    forceFallback: true,
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ forceFallback: false })
+    }, 5000)
+  }
+
+  render() {
+    const { forceFallback } = this.state
+
+    return (
+      <SizesProvider
+        config={{ fallbackHeight: 640, fallbackWidth: 280, forceFallback }}
+      >
+        <Result>
+          {forceFallback && <p>Forcing fallback to mobile</p>}
+          <ExampleSizedComponent />
+        </Result>
+      </SizesProvider>
+    )
+  }
+}
 
 storiesOf('Sizes', module)
   .add('default behavior', () => (
@@ -54,7 +82,6 @@ const ExampleSizedComponent = withSizes(mapSizesToProps)(
       </Code>
     </div>
   ))
-
   .add('mobileBreakpoint', () => (
     <div>
       <MobileBreakpoint breakpoint={300} />
@@ -62,3 +89,4 @@ const ExampleSizedComponent = withSizes(mapSizesToProps)(
       <MobileBreakpoint breakpoint={700} />
     </div>
   ))
+  .add('force fallback', () => <ForceFallbackExample />)
