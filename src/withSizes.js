@@ -69,6 +69,7 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
     }
 
     componentWillUnmount() {
+      this.throttledDispatchSizes.cancel()
       window.removeEventListener('resize', this.throttledDispatchSizes)
     }
 
