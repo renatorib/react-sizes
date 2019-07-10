@@ -18,7 +18,7 @@ npm install react-sizes
 
 ## What and why
 
-React Sizes is a high-order component with a high performance that transform window sizes (width and height) into props.  
+React Sizes is a higher-order component with strong performance that transforms window sizes (width and height) into props.  
 You can check inside your component, for example, if user's window is less than 480 pixels of width, and add a custom
 content.
 
