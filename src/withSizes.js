@@ -75,9 +75,12 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
 
     render() {
       const {
+        // Ensure all the `SizesContext.js` arguments are excluded.
+        // Keep this in sync with `SizesContextjs` fields
         fallbackHeight,
         fallbackWidth,
         forceFallback,
+        throttle,
         ...otherProps
       } = this.props
 
