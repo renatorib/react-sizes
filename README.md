@@ -80,7 +80,7 @@ const MyComponent = enhancer(({ isMobile, counter, setCounter }) => (
   <div>
     <div>
       Count: {counter}{' '}
-      <button onClick={() => setCounter(n => n + 1)}>Increment</button>
+      <button onClick={() => setCounter((n) => n + 1)}>Increment</button>
     </div>
     <div>{isMobile ? 'Is Mobile' : 'Is Not Mobile'}</div>
   </div>
@@ -154,14 +154,14 @@ withSizes.isMobile = ({ width }) => width < 480
 withSizes.isTablet = ({ width }) => width >= 480 && width < 1024
 withSizes.isDesktop = ({ width }) => width >= 1024
 
-withSizes.isGtMobile = sizes => !withSizes.isMobile(sizes)
-withSizes.isGtTablet = sizes => withSizes.isDesktop(sizes)
+withSizes.isGtMobile = (sizes) => !withSizes.isMobile(sizes)
+withSizes.isGtTablet = (sizes) => withSizes.isDesktop(sizes)
 
-withSizes.isStTablet = sizes => withSizes.isMobile(sizes)
-withSizes.isStDesktop = sizes => !withSizes.isStDesktop(sizes)
+withSizes.isStTablet = (sizes) => withSizes.isMobile(sizes)
+withSizes.isStDesktop = (sizes) => !withSizes.isStDesktop(sizes)
 
-withSizes.isTabletAndGreater = sizes => !withSizes.isMobile(sizes)
-withSizes.isTabletAndSmaller = sizes => !withSizes.isStDesktop(sizes)
+withSizes.isTabletAndGreater = (sizes) => !withSizes.isMobile(sizes)
+withSizes.isTabletAndSmaller = (sizes) => !withSizes.isStDesktop(sizes)
 ```
 
 If it don't fit to your needs, you can create your own selectors.
@@ -174,13 +174,23 @@ export const backgroundColor = ({ width }) => (width < 480 ? 'red' : 'green')
 // your component
 import { isntDesktop, backgroundColor } from 'utils/sizes/selectors'
 
-const mapSizesToProps = sizes => ({
+const mapSizesToProps = (sizes) => ({
   canDisplayMobileFeature: isntDesktop(sizes),
   backgroundColor: backgroundColor(sizes),
 })
 ```
 
 > `sizes` argument is an object with `width` and `height` properties and represents DOM window width and height.
+
+## Window Width Resource
+
+By default react-sizes will use `window.innerWidth` to determine the width of the current window. This will also take in to account a body scroll bar. If you'd rather ignore the body's scrollbar and base the size on the document's client width, pass the `useDocumentElement` option:
+
+```jsx
+<SizeProvider config={{ useDocumentElement: true }}>
+  <App />
+</SizeProvider>
+```
 
 ## Guide
 
@@ -189,7 +199,7 @@ const mapSizesToProps = sizes => ({
 `sizes` argument is an object with `width` and `height` of DOM window.
 
 ```js
-const mapSizesToProps = sizes => {
+const mapSizesToProps = (sizes) => {
   console.log(sizes) // { width: 1200, height: 720 } (example)
 }
 ```
@@ -197,7 +207,7 @@ const mapSizesToProps = sizes => {
 In pratice, it is a callback that return props that will injected into your Component.
 
 ```js
-const mapSizesToProps = function(sizes) {
+const mapSizesToProps = function (sizes) {
   const props = {
     backgroundColor: sizes.width < 700 ? 'red' : 'green',
   }
@@ -238,7 +248,7 @@ import Express from 'express'
 import { SizesProvider } from 'react-sizes'
 // All other imports
 
-const getSizesFallback = userAgent => {
+const getSizesFallback = (userAgent) => {
   const md = new MobileDetect(userAgent)
 
   if (!!md.mobile()) {

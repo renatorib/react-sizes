@@ -9,15 +9,25 @@ import getWindowSizes from './utils/getWindowSizes'
 import SizesContext from './SizesContext'
 import * as presets from './presets'
 
-const getWindowSizesWithFallback = props => {
-  const { fallbackHeight, fallbackWidth, forceFallback } = props
-  return getWindowSizes({ fallbackHeight, fallbackWidth, forceFallback })
+const getWindowSizesWithFallback = (props) => {
+  const {
+    useDocumentElement,
+    fallbackHeight,
+    fallbackWidth,
+    forceFallback,
+  } = props
+  return getWindowSizes({
+    useDocumentElement,
+    fallbackHeight,
+    fallbackWidth,
+    forceFallback,
+  })
 }
 
-const withSizes = (...mappedSizesToProps) => WrappedComponent => {
+const withSizes = (...mappedSizesToProps) => (WrappedComponent) => {
   const parseMappedSizesToProps = (dimensions, props) =>
     mappedSizesToProps
-      .map(check => check(dimensions, props))
+      .map((check) => check(dimensions, props))
       .reduce((acc, props) => ({ ...acc, ...props }), {})
 
   class ComponentWithSizes extends PureComponent {
@@ -85,9 +95,9 @@ const withSizes = (...mappedSizesToProps) => WrappedComponent => {
     }
   }
 
-  const WithSizes = props => (
+  const WithSizes = (props) => (
     <SizesContext.Consumer>
-      {config => <ComponentWithSizes {...config} {...props} />}
+      {(config) => <ComponentWithSizes {...config} {...props} />}
     </SizesContext.Consumer>
   )
 
