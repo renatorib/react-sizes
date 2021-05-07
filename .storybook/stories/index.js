@@ -5,7 +5,7 @@ import MobileBreakpoint from '../components/MobileBreakpoint'
 import withSizes from '../../src/withSizes'
 import SizesProvider from '../../src/SizesProvider'
 
-const mapSizesToProps = sizes => ({
+const mapSizesToProps = (sizes) => ({
   backgroundColor: sizes.width > 800 ? 'green' : 'blue',
   isMobile: withSizes.isMobile(sizes),
   isTablet: withSizes.isTablet(sizes),
@@ -24,6 +24,73 @@ const ExampleSizedComponent = withSizes(mapSizesToProps)(
     </div>
   )
 )
+
+class DocumentElementExample extends React.Component {
+  state = {
+    windowWidth: window.innerWidth,
+    documentWidth: document.documentElement.clientWidth,
+  }
+
+  constructor(...args) {
+    super(...args)
+    this.resetState = this.resetState.bind(this)
+  }
+
+  resetState() {
+    this.setState({
+      windowWidth: window.innerWidth,
+      documentWidth: document.documentElement.clientWidth,
+    })
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.resetState)
+    this.resetState()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resetState)
+  }
+
+  render() {
+    return (
+      <>
+        <style>
+          {`html {
+            overflow-y: scroll;
+          }`}
+        </style>
+        <SizesProvider config={{ useDocumentElement: true }}>
+          <Result>
+            <ExampleSizedComponent />
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <pre>window.innerWidth</pre>
+                  </th>
+                  <th>
+                    <pre>document.documentElement.clientWidth</pre>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <pre>{this.state.windowWidth}</pre>
+                  </td>
+                  <td>
+                    <pre>{this.state.documentWidth}</pre>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </Result>
+        </SizesProvider>
+      </>
+    )
+  }
+}
 
 class ForceFallbackExample extends React.Component {
   state = {
@@ -82,6 +149,7 @@ const ExampleSizedComponent = withSizes(mapSizesToProps)(
       </Code>
     </div>
   ))
+  .add('useDocumentElement', () => <DocumentElementExample />)
   .add('mobileBreakpoint', () => (
     <div>
       <MobileBreakpoint breakpoint={300} />

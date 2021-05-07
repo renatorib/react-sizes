@@ -1,6 +1,7 @@
 import React from 'react'
 
 const SizesContext = React.createContext({
+  useDocumentElement: false,
   fallbackWidth: null,
   fallbackHeight: null,
   forceFallback: false,
